@@ -301,6 +301,7 @@ Transform:
   - {fileID: 1985422639}
   - {fileID: 1749438266}
   - {fileID: 2141135058}
+  - {fileID: 1474961562}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -681,12 +682,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1474961557}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 316971353}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1584839830 stripped
 GameObject:
@@ -806,7 +807,7 @@ GameObject:
   - component: {fileID: 1796676100}
   - component: {fileID: 1796676099}
   m_Layer: 0
-  m_Name: greenSphere
+  m_Name: Green Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -883,8 +884,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1796676098}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.66}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1133,6 +1134,37 @@ Prefab:
         type: 2}
       propertyPath: boostDec
       value: 1.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 114318143233907476, guid: f3582667e4cc9a3459bf095deada66d2,
+        type: 2}
+      propertyPath: _rbLaserPrefab
+      value: 
+      objectReference: {fileID: 54100221159549498, guid: 87d2e994b151aa34c95a18f6fa1e5c03,
+        type: 2}
+    - target: {fileID: 114318143233907476, guid: f3582667e4cc9a3459bf095deada66d2,
+        type: 2}
+      propertyPath: _transBarelEnd
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114318143233907476, guid: f3582667e4cc9a3459bf095deada66d2,
+        type: 2}
+      propertyPath: tankFront
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114318143233907476, guid: f3582667e4cc9a3459bf095deada66d2,
+        type: 2}
+      propertyPath: tankHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114318143233907476, guid: f3582667e4cc9a3459bf095deada66d2,
+        type: 2}
+      propertyPath: laserForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114318143233907476, guid: f3582667e4cc9a3459bf095deada66d2,
+        type: 2}
+      propertyPath: canBoost
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 54058636592794922, guid: f3582667e4cc9a3459bf095deada66d2, type: 2}

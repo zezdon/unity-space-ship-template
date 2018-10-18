@@ -12,29 +12,37 @@ public class scrPlayer : MonoBehaviour {
     public float boostAmt = 100f;
     public float boostDec = 1.02f;
     public float boostInc = 50f;
+    public float tankHeight, tankFront;
+    public float laserForce;
 
     public Transform trans;
     public Rigidbody rb;
+    public Rigidbody _rbLaserPrefab;
+    public Transform _transBarelEnd;
+    public Transform _transGreenSphere;
 
     public bool amGrounded = false;
-    public bool canBoost = false;
+    public bool canBoost = true;
     public bool amBoosting = false;
 
     private void Awake()
     {
         trans = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
+        _transGreenSphere = GameObject.Find("Green Sphere").GetComponent<Transform>();
     }
 
-    // Use this for initialization
     void Start () {
-		
+        canBoost = true;
+        tankHeight = 1.13f;
+        tankFront = 2.47f;
+        laserForce = 4000f;
 	}
 	
-	// Update is called once per frame
 	void Update ()
     {
         moveAlarms();
+        _transGreenSphere.position = trans.position + (trans.forward*tankFront) + (trans.up*tankHeight);
 
         // POSITION
         Vector3 moveVect = Vector3.zero;
@@ -73,7 +81,19 @@ public class scrPlayer : MonoBehaviour {
         if (amGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+            canBoost = false;
+
             Invoke("setCanBoostTrue", boostWait);
+        }
+
+        //SHOOTING
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            print("Shoot!");
+            //Instantiate(_rbLaserPrefab, trans);
+            //Quaternion prefabRot = _rbLaserPrefab.gameObject.transform.rotation;
+            Rigidbody laserInstance = Instantiate(_rbLaserPrefab, trans.position + (trans.forward * tankFront) + (trans.up * tankHeight), trans.rotation) as Rigidbody;
+            laserInstance.AddForce(trans.forward * laserForce);
         }
     }
 
@@ -104,7 +124,6 @@ public class scrPlayer : MonoBehaviour {
                 if (cp.normal.y > 0.5f)
                 {
                     amGrounded = true;
-                    canBoost = false;
                 }
             }
         }
