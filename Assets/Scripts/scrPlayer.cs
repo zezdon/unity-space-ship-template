@@ -12,8 +12,7 @@ public class scrPlayer : MonoBehaviour {
     public float boostAmt = 100f;
     public float boostDec = 1.02f;
     public float boostInc = 50f;
-    public float tankHeight, tankFront;
-    public float laserForce;
+    public float tankHeight, tankFront, laserForce;
 
     public Transform trans;
     public Rigidbody rb;
