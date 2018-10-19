@@ -36,7 +36,7 @@ public class scrPlayer : MonoBehaviour {
         canBoost = true;
         tankHeight = 1.13f;
         tankFront = 2.47f;
-        laserForce = 4000f;
+        laserForce = 100f;
 	}
 	
 	void Update ()
@@ -85,11 +85,11 @@ public class scrPlayer : MonoBehaviour {
         //if (Input.GetAxis("Fire1") > 0f) //GetAxis return a float
         if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Joystick1Button5))
         {
-            print("Shoot!");
+            //print("Shoot!");
             //Instantiate(_rbLaserPrefab, trans);
             //Quaternion prefabRot = _rbLaserPrefab.gameObject.transform.rotation;
             Rigidbody laserInstance = Instantiate(_rbLaserPrefab, trans.position + (trans.forward * tankFront) + (trans.up * tankHeight), trans.rotation) as Rigidbody;
-            laserInstance.AddForce(trans.forward * laserForce);
+            laserInstance.AddForce(trans.forward * laserForce, ForceMode.VelocityChange);
         }
     }
 
