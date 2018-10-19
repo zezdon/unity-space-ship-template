@@ -44,41 +44,36 @@ public class scrPlayer : MonoBehaviour {
         moveAlarms();
         _transGreenSphere.position = trans.position + (trans.forward*tankFront) + (trans.up*tankHeight);
 
-        // POSITION
+        // POSITION /////////////////////////////////////////////////////////////////////
         Vector3 moveVect = Vector3.zero;
 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-        { 
-            moveVect.z += 1f;
-        }
-        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-        {
-            moveVect.z -= 1f;
-        }
+        /*
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))         
+            moveVect.z += 1f;        
+        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))        
+            moveVect.z -= 1f;        
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))        
+            moveVect.x -= 1f;        
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))        
+            moveVect.x += 1f;*/
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            moveVect.x -= 1f;
-        }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            moveVect.x += 1f;
-        }
-
+        moveVect.x = Input.GetAxis("Horizontal");
+        moveVect.z = Input.GetAxis("Vertical");
+        
         trans.Translate(moveVect * (movSpeed * Time.deltaTime));
 
-        // ROTATION
-        if (Input.GetKey(KeyCode.Q))
-        {
-            trans.Rotate(Vector3.up, -rotSpeed * Time.deltaTime);
-        }
-        else if (Input.GetKey(KeyCode.E))
-        {
+        // ROTATION //////////////////////////////////////////////////////////////////////////////
+        /*
+        if (Input.GetKey(KeyCode.Q))        
+            trans.Rotate(Vector3.up, -rotSpeed * Time.deltaTime);        
+        else if (Input.GetKey(KeyCode.E))        
             trans.Rotate(Vector3.up, rotSpeed * Time.deltaTime);
-        }
+        */
 
-        // JUMPING
-        if (amGrounded && Input.GetKeyDown(KeyCode.Space))
+        trans.Rotate(Vector3.up, Input.GetAxis("Rotate") * rotSpeed * Time.deltaTime);
+
+        // JUMPING //////////////////////////////////////////////////////////////////////////////
+        if (amGrounded && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button4)))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
             canBoost = false;
@@ -86,8 +81,9 @@ public class scrPlayer : MonoBehaviour {
             Invoke("setCanBoostTrue", boostWait);
         }
 
-        //SHOOTING
-        if(Input.GetKeyDown(KeyCode.X))
+        //SHOOTING ////////////////////////////////////////////////////////////////////////////////
+        //if (Input.GetAxis("Fire1") > 0f) //GetAxis return a float
+        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Joystick1Button5))
         {
             print("Shoot!");
             //Instantiate(_rbLaserPrefab, trans);
@@ -99,8 +95,8 @@ public class scrPlayer : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        // BOOSTING
-        if (canBoost && Input.GetKey(KeyCode.Space) && boostAmt > 0)
+        // BOOSTING /////////////////////////////////////////////////////////////////////////////
+        if (canBoost && boostAmt > 0 && (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Joystick1Button4)))
         {
             rb.AddForce(Vector3.up * boostForce, ForceMode.Acceleration);
             boostAmt -= boostDec;
